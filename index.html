@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<head>
+		<link rel="stylesheet" href="style.css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700' rel='stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<script src="jquery-3.5.1.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+		<script type="text/javascript" src="js/jquerry.js">
+		</script>
+	</head>
+	<header>
+		
+	</header>
+		<body >
+
+			<div class="container">
+
+				<div class="row">
+					<form>
+					<fieldset>
+						<legend> New Events </legend>
+						<input type="text" class="form-control"
+
+						"name= "" id="iteam"
+						name="">
+
+						<legend> Time event</legend>
+						<input type="text" class="form-control"
+
+						"name= "" id="quantity"
+						name="">
+
+			<button id="insert" class="btn btn-success" >Insert</button>
+
+			<button id="insert" class="btn btn-success" >Create Table </button>
+
+			<button id="insert" class="btn btn-success" >Delete Table</button>
+
+			<button id="insert" class="btn btn-success" >Fetch Record</button>
+					</fieldset>
+					<form>
+			<hr>
+			<h4>Events </h4>
+			<table class="table tale-bordered table-hover">
+
+<script type="text/javascript">
+	var db=openDatabase("iteamDB","1.0","iteamDB",65535);
+
+$(function()
+{
+	$("#create").click(function()
+	{
+		db.transaction(function(transaction){
+			var sql="CREATE TABLE items" +"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+ "iteam VARCHAR(100) NOT NULL," +
+			"quantity INT(5) NOT NULL)";
+			transaction.executeSql(sql,undefined, function()
+			{
+
+				alert("Create is created successfully");
+			},function(){
+				alert("Table is already being created");
+			})
+
+		})
+
+	});
+});
+//to remove
+
+$("#remove").click(function()
+{
+if (!confim("Are you sure to delete this table?" ,""))
+return;;
+db.transaction(function(transaction){
+	var sql="DELETE TABLE iteams";
+	transaction.executeSql(sql,undefined, function()
+	{
+		alert("Table is deleted successfully")
+},function(transaction,err){
+	alert(err.message);
+})
+
+	})
+})
+//to insert
+$("#insert").click(function(){
+	var iteam=$("#iteam").val();
+	var qty=$("#quantity").val();
+	db.transaction(function(transaction)
+	{
+		var sql="INSERT INTO items(iteam,quantity)VALUES (?,?)";
+		transaction.executeSql(sql,[iteam,quantity] , function()
+		{
+			alert("New items is added successfully");
+		},function(transaction,err){
+		alert(err.message);
+	})
+
+
+	})
+})
+
+// to fetch
+
+$("#list").click(function(){
+	loadData();
+})
+
+function loadData()
+{
+
+$("#iteamlist").childre().remove();
+	db.transaction(function(transaction){
+
+		var sql="SELECT * FROM iteams ODRED by id DESC";
+		transaction.executeSql(sql,undefined,
+			function(transaction,result)
+		{
+			if(result.rows.length)
+			{
+
+			for(var i=0;i<result.rows.lenght;i++)
+			{
+				var row=result.rows.item(i);
+				var iteam=rows.iteam;
+				var id=rows.id;
+				var quantity=row.quantity;
+				$("#itemlist").append('<tr><td>'+id+'</td><td>'+iteam+
+					'</td><td>'+quantity+'</td><td>');
+			}
+
+
+			}else{
+			$("#itemlist").append('<tr><td colspn="3"align="center"> No Iteam Found</td></tr>');
+}
+
+ },function(transaction,err){
+ 	alert(err.message);
+
+})
+
+})
+
+})
+
+})
+	
+</script>
+
+			</table>
+				</div>
+			<div>
+
+<img src="portfolio-header.jpg">
+
+		</body>
+</html>
